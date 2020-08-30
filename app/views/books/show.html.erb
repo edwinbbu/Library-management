@@ -11,8 +11,8 @@
 </p>
 
 <p>
-  <strong>String:</strong>
-  <%= @book.string %>
+  <strong>Department:</strong>
+  <%= @department && @department.name %>
 </p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
