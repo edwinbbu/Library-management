@@ -25,7 +25,6 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(book_params)
-    @departments = Department.all()
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
@@ -65,12 +64,12 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
-      puts @book.department_id
       @department = Department.find_by(id: @book.department_id)
+      @book.department = @department
     end
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:name, :author)
+      params.require(:book).permit(:name, :author, :department_id)
     end
 end
